@@ -2,3 +2,4 @@ SQLAlchemy
 pymysql
 streamlit
 python-dotenv
+cryptography
