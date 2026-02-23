@@ -1,5 +1,6 @@
 from database import Base
 from sqlalchemy import Column, Integer, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 
 class Progreso(Base):
     __tablename__ = 'progreso'
@@ -30,3 +31,5 @@ class Progreso(Base):
         nullable=False,
         default=0
     )
+    usuario_relationship = relationship('Usuario', back_populates='progresos_relationship')
+    tema_relationship = relationship('Topic', back_populates='progresos_relationship')

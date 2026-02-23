@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean
 from database import Base
+from sqlalchemy.orm import relationship
 
 class Usuario(Base):
     __tablename__ = 'usuarios'
@@ -24,3 +25,5 @@ class Usuario(Base):
         Boolean,
         default=False
     )
+    progresos_relationship = relationship('Progreso', back_populates='usuario_relationship', cascade='all, delete-orphan')
+

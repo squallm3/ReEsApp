@@ -1,5 +1,6 @@
 from database import Base
 from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.orm import relationship
 
 class Topic(Base):
     __tablename__ = 'temas'
@@ -23,3 +24,5 @@ class Topic(Base):
         'comandos',
         Text
     )
+    progresos_relationship = relationship('Progreso', back_populates='tema_relationship', cascade='all, delete-orphan')
+
