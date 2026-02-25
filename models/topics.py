@@ -1,5 +1,5 @@
 from database import Base
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 
 class Topic(Base):
@@ -24,5 +24,12 @@ class Topic(Base):
         'comandos',
         Text
     )
+    categoria = Column(
+        'id_categoria',
+        Integer,
+        ForeignKey('categorias.id_categoria')
+    )
     progresos_relationship = relationship('Progreso', back_populates='tema_relationship', cascade='all, delete-orphan')
+    categorias_relationship = relationship('Categoria', back_populates='temas_relationship')
+
 

@@ -1,5 +1,6 @@
 from database import Base
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 class Categoria(Base):
     __tablename__ = 'categorias'
@@ -14,3 +15,4 @@ class Categoria(Base):
         unique=True,
         nullable=False
     )
+    temas_relationship = relationship('Topic', back_populates='categorias_relationship')
