@@ -3,3 +3,4 @@ pymysql
 streamlit
 python-dotenv
 cryptography
+bcrypt
