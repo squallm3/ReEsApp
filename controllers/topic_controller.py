@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from models.topics import Topic
+from models.progress import Progreso
 
 def crear_tema(db: Session, tema_data: dict):
     try:
@@ -50,3 +51,12 @@ def eliminar_tema(db: Session, tema_id: int):
         db.rollback()
         print(f'El tema no se elimino debidoa a {e}')
     return False
+
+def obtener_ultimos_cuatro_temas(db: Session):
+    ultimos_temas = db.query(Topic).order_by(Topic.id.desc()).limit(4).all()
+    return ultimos_temas
+
+def obtener_temas_elegibles(db: Session, usuario: int, ids_ultimos_temas: list):
+    subquery_vistos = db.query(Progreso.tema).filter(Progreso.usuario == usuario).subquery()
+    temas_elegibles = db.query(Topic).filter(Topic.id.notin_(ids_ultimos_temas), Topic.id.notin_(subquery_vistos)).all()
+    return temas_elegibles
